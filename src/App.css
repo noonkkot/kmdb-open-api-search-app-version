@@ -229,7 +229,7 @@ footer {
 .popup {
   position: fixed;
   width: 200px;
-  height: 320px;
+  height: 300px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -238,13 +238,12 @@ footer {
   border: 1px solid #ccc;
   border-radius: 15px;
   z-index: 1000;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items:flex-end; */
+  box-sizing: border-box;
 }
 
 .popup img {
-  width: 100%;
+  max-width: 160px;
+  box-sizing: border-box;
   height: auto;
   border: 1px solid #ccc;
   
@@ -257,7 +256,7 @@ footer {
   border: none;
   border-radius: 5px;
   color: #fff;
-  margin-top: 4px;
+  margin-top: 5px;
   transition: all 0.4s ease;
 }
 

@@ -32,15 +32,9 @@ function App() {
     const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${query}&ServiceKey=${ServiceKey}`;
   
     try {
-      const response = await axios.get(url/* , {
-        params: {
-          ServiceKey: key,
-          collection: 'kmdb_new2',
-          listCount: 100,
-        },
-      } */);
+      const response = await axios.get(url);
   
-      console.log('Response:', response.data);
+      // console.log('Response:', response.data);
   
       if (response.data?.Data?.length > 0) {
         const newMovieList = response.data.Data[0].Result;
