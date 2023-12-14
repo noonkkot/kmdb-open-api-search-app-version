@@ -28,10 +28,8 @@ function App() {
       return;
     }
 
-    // const query = encodeURIComponent(item);
-    // const actorquery = encodeURIComponent(item);
-    const directquery = encodeURIComponent(item);
-    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${directquery}&ServiceKey=${ServiceKey}`;
+    const query = encodeURIComponent(item);
+    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${query}&ServiceKey=${ServiceKey}`;
   
     try {
       const response = await axios.get(url/* , {
@@ -72,11 +70,15 @@ function App() {
   };
 
   useEffect(() => {
-    if (item.trim()) {
-      fetchMovie();
-    } else {
-      setMovie([]);
-    }
+    const fetchData = async () => {
+      if (item.trim()) {
+        await fetchMovie();
+      } else {
+        setMovie([]);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   function Popup({ posterUrl, onClose }) {
