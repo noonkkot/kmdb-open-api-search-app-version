@@ -105,6 +105,22 @@ function App() {
     fetchData();
   }, []);
 
+  const handleSearch = async () => {
+    if (item.trim() && optVal) {
+      await fetchMovie();
+    } else {
+      setMovie([]);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await handleSearch();
+    };
+
+    fetchData();
+  }, [optVal]);
+
   return (
     <>
       <div className="App">
@@ -112,7 +128,7 @@ function App() {
         {/* 옵션 선택을 위한 select 요소 */}
         <div className='searchSelect'>
           <SelectOption value={optVal} onChange={handleSelectChange} />
-          <SearchBar onClick={fetchMovie} onChange={searchItem}></SearchBar>
+          <SearchBar onClick={handleSearch} onChange={searchItem}></SearchBar>
 
         </div>
           {/* 옵션에 따라 다른 Result 컴포넌트 렌더링 */}
