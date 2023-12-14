@@ -51,8 +51,8 @@ function App() {
     try {
       const response = await axios.get(url);
   
-      console.log('Response:', response.data);
-  
+      // console.log('Response:', response.data);
+
       if (response.data?.Data?.length > 0) {
         const newMovieList = response.data.Data[0].Result;
   
