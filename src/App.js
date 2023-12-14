@@ -97,7 +97,7 @@ function App() {
     };
 
     fetchData();
-  }, [optVal]);
+  }, []);
 
   return (
     <div className="App">
