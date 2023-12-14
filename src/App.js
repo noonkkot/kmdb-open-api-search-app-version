@@ -9,11 +9,6 @@ function App() {
   const [item, setItem] = useState("");
   const [selectedMoviePoster, setSelectedMoviePoster] = useState(null);
   const key = process.env.REACT_APP_API_KEY;
-  const query = encodeURIComponent(item);
-  const actorquery = encodeURIComponent(item);
-  const directquery = encodeURIComponent(item);
-  const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&title=${query}/&director=${directquery}&actor=${actorquery}&ServiceKey=${key}`;
-  
   const openPopup = (posterUrl) => {
     setSelectedMoviePoster(posterUrl);
   };
@@ -28,15 +23,15 @@ function App() {
 
   const fetchMovie = async () => {
     if (!item.trim()) {
-      console.warn("검색 결과가 없습니다.");
+      // console.warn("검색 결과가 없습니다.");
       setMovie([]);
       return;
     }
 
-    const query = encodeURIComponent(item);
-    const actorquery = encodeURIComponent(item);
+    // const query = encodeURIComponent(item);
+    // const actorquery = encodeURIComponent(item);
     const directquery = encodeURIComponent(item);
-    const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&title=${query}&director=${directquery}&ServiceKey=${key}`;
+    const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${directquery}&ServiceKey=${key}`;
   
     try {
       const response = await axios.get(url, {
@@ -70,7 +65,7 @@ function App() {
         setMovie([]);
       }
     } catch (e) {
-      console.warn("검색 결과가 없습니다.");
+      // console.warn("검색 결과가 없습니다.");
       setMovie([]);
       return;
     }
