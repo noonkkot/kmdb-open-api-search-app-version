@@ -8,7 +8,7 @@ function App() {
   const [movie, setMovie] = useState([]);
   const [item, setItem] = useState("");
   const [selectedMoviePoster, setSelectedMoviePoster] = useState(null);
-  const key = process.env.REACT_APP_API_KEY;
+  const ServiceKey = process.env.REACT_APP_API_KEY;
   const openPopup = (posterUrl) => {
     setSelectedMoviePoster(posterUrl);
   };
@@ -31,7 +31,7 @@ function App() {
     // const query = encodeURIComponent(item);
     // const actorquery = encodeURIComponent(item);
     const directquery = encodeURIComponent(item);
-    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${directquery}&ServiceKey=${key}`;
+    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${directquery}&ServiceKey=${ServiceKey}`;
   
     try {
       const response = await axios.get(url/* , {
