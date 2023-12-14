@@ -1,1 +1,1 @@
-/api/* https://api.koreafilm.or.kr/:splat 200
+/openapi-data2/wisenut/search_api/search_json2.jsp https://api.koreafilm.or.kr/:splat 200
