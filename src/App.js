@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   const [movie, setMovie] = useState([]);
-  const [item, setItem] = useState("");
+  const [item, setItem] = useState('');
   const [selectedMoviePoster, setSelectedMoviePoster] = useState(null);
   const ServiceKey = process.env.REACT_APP_API_KEY;
   const openPopup = (posterUrl) => {
@@ -45,12 +45,13 @@ function App() {
     }
 
     const query = encodeURIComponent(item);
-    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${query}&ServiceKey=${ServiceKey}&listCount=20`;
+    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${query}&ServiceKey=${ServiceKey}&listCount=20&prodYear,1`;
+    // prodYear,1 내림차순 prodYear,0 오름차순
   
     try {
       const response = await axios.get(url);
   
-      // console.log('Response:', response.data);
+      console.log('Response:', response.data);
   
       if (response.data?.Data?.length > 0) {
         const newMovieList = response.data.Data[0].Result;
@@ -97,7 +98,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1><img src={process.env.PUBLIC_URL + 'images/logo-kor.png'} alt="KMDb 로고" /></h1>
+      <h1><img src={process.env.PUBLIC_URL + 'images/logo-new.png'} alt="KMDb 로고" /></h1>
       <SearchBar onClick={fetchMovie} onChange={searchItem}></SearchBar>
       <Result movie={movie} openPopup={openPopup} />
       {selectedMoviePoster && (
