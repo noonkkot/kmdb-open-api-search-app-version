@@ -31,7 +31,7 @@ function App() {
     // const query = encodeURIComponent(item);
     // const actorquery = encodeURIComponent(item);
     const directquery = encodeURIComponent(item);
-    const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${directquery}&ServiceKey=${key}`;
+    const url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${directquery}&ServiceKey=${key}`;
   
     try {
       const response = await axios.get(url, {
