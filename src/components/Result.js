@@ -24,7 +24,7 @@ function Result({ movie, openPopup }) {
                   <br />
                   {item.titleEng}
                 </td>
-                <td>{item.director.replace(/\!HE/g, "").replace(/\!HS/g, "")}</td>
+                <td>{item.directors.replace(/\!HE/g, "").replace(/\!HS/g, "")}</td>
                 <td>{item.actors.replace(/\!HE/g, "").replace(/\!HS/g, "")}</td>
                 <td>{item.genre}</td>
                 <td>{item.nation}</td>

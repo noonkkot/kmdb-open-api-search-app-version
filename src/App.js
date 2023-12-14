@@ -21,6 +21,22 @@ function App() {
     setItem(event.target.value);
   };
 
+  function Popup({ posterUrl, onClose }) {
+    const handlePopupClick = () => {
+      // 어떤 위치를 클릭하든 팝업 닫기
+      onClose();
+    };
+    
+    const firstPosterUrl = posterUrl.split('|')[0];
+
+    
+    return (
+      <div className="popup" onClick={handlePopupClick}>
+        <img src={firstPosterUrl} alt="Movie Poster" />
+      </div>
+    );
+  }
+
   const fetchMovie = async () => {
     if (!item.trim()) {
       // console.warn("검색 결과가 없습니다.");
@@ -42,7 +58,7 @@ function App() {
         const responseData = newMovieList.map((movie) => ({
           title: movie.title,
           titleEng: movie.titleEng,
-          director: movie.directors?.director[0]?.directorNm || '',
+          directors: movie.directors?.director?.map((director) => director.directorNm).join(', ') || '',
           actors: movie.actors?.actor?.map((actor) => actor.actorNm).join(', ') || '',
           genre: movie.genre || '',
           nation: movie.nation || '',
@@ -75,16 +91,9 @@ function App() {
     fetchData();
   }, []);
 
-  function Popup({ posterUrl, onClose }) {
+  
 
-    const firstPosterUrl = posterUrl.split('|')[0];
-    return (
-      <div className="popup">
-        <img src={firstPosterUrl} alt="Movie Poster" />
-        <button onClick={onClose}>닫기</button>
-      </div>
-    );
-  }
+  
 
   return (
     <div className="App">
