@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SelectOption from './components/SelectOption';
 import SearchBar from './components/SearchBar';
 import Result from './components/Result';
 import './App.css';
+import { isEqual } from 'lodash';
 
 function App() {
   const [movie, setMovie] = useState([]);
   const [item, setItem] = useState('');
-  const [optVal, setOptVal] = useState('');
+  const [optVal, setOptVal] = useState('1');
   const [selectedMoviePoster, setSelectedMoviePoster] = useState(null);
   const ServiceKey = process.env.REACT_APP_API_KEY;
 
@@ -52,11 +54,13 @@ function App() {
     
     // 옵션에 따라 URL 선택
     if (optVal === '1') {
-      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${query}&ServiceKey=${ServiceKey}&listCount=20&prodYear,1`;
+      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&query=${query}&ServiceKey=${ServiceKey}&listCount=20`;
     } else if (optVal === '2') {
-      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&actor=${query}&ServiceKey=${ServiceKey}&listCount=20&prodYear,1`;
+      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&title=${query}&ServiceKey=${ServiceKey}&listCount=20&sort=prodYear,1`;
     } else if (optVal === '3') {
-      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&title=${query}&ServiceKey=${ServiceKey}&listCount=20&prodYear,1`;
+      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&director=${query}&ServiceKey=${ServiceKey}&listCount=20&sort=prodYear,1`;
+    } else if (optVal === '4') {
+      url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&actor=${query}&ServiceKey=${ServiceKey}&listCount=20&sort=prodYear,1`;
     }
 
     try {
@@ -77,7 +81,9 @@ function App() {
           posterUrl: movie.posters || '',
         }));
 
-        setMovie(responseData);
+        if (!isEqual(movie, responseData)) {
+          setMovie(responseData); 
+        }
       } else {
         setMovie([]);
       }
@@ -100,32 +106,27 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1><img src={process.env.PUBLIC_URL + 'images/logo-new.png'} alt="KMDb 로고" /></h1>
-      <SearchBar onClick={fetchMovie} onChange={searchItem}></SearchBar>
+    <>
+      <div className="App">
+        <h1><img src={process.env.PUBLIC_URL + 'images/logo-new.png'} alt="KMDb 로고" /></h1>
+        {/* 옵션 선택을 위한 select 요소 */}
+        <div className='searchSelect'>
+          <SelectOption value={optVal} onChange={handleSelectChange} />
+          <SearchBar onClick={fetchMovie} onChange={searchItem}></SearchBar>
 
-      {/* 옵션 선택을 위한 select 요소 */}
-      <select value={optVal} onChange={handleSelectChange}>
-        <option value="">선택하세요</option>
-        <option value="1">감독</option>
-        <option value="2">배우</option>
-        <option value="3">영화제목</option>
-      </select>
+        </div>
+          {/* 옵션에 따라 다른 Result 컴포넌트 렌더링 */}
+          {(optVal === '1' || optVal === '2' || optVal === '3' || optVal === '4') && <Result movie={movie} openPopup={openPopup} />}
 
-      {/* 옵션에 따라 다른 Result 컴포넌트 렌더링 */}
-      {optVal === '1' && <Result movie={movie} openPopup={openPopup} />}
-      {optVal === '2' && <Result movie={movie} openPopup={openPopup} />}
-      {optVal === '3' && <Result movie={movie} openPopup={openPopup} />}
-
-      {selectedMoviePoster && (
-        <Popup posterUrl={selectedMoviePoster} onClose={closePopup} />
-      )}
-
-      <footer>
-        Copyright 2023. LEE SEOLHWA All rights reserved.<br />
-        한국영상자료원의 OPEN API KEY를 활용해 제작한 사이트입니다.
-      </footer>
-    </div>
+          {selectedMoviePoster && (
+            <Popup posterUrl={selectedMoviePoster} onClose={closePopup} />
+          )}
+        <footer>
+          Copyright 2023. LEE SEOLHWA All rights reserved.<br />
+          한국영상자료원의 OPEN API KEY를 활용해 제작한 사이트입니다.
+        </footer>
+      </div>
+    </>
   );
 }
 
