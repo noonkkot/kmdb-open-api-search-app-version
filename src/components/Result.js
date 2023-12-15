@@ -18,8 +18,8 @@ function Result({ movie, openPopup }) {
           </thead>
           <tbody>
             {movie.map((item, index) => (
-              <tr key={index}>
-                <td onClick={() => openPopup(item.posterUrl)}>
+              <tr key={index} onClick={() => openPopup(item.posterUrl)}>
+                <td>
                   {item.title.replace(/\!HE/g, "").replace(/\!HS/g, "")}
                   <br />
                   {item.titleEng}
