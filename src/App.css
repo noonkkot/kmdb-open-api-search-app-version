@@ -11,6 +11,28 @@
   font-style: normal;
 }
 
+body {
+  background-image: linear-gradient(to bottom, #accbee 0%, #e7f0fd 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  overflow-y: hidden;
+}
+
+@media screen and (max-width: 768px) {
+	body {
+    min-height: 100%;
+	}
+}
+
+#root {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
 
 li {
   list-style: none;
@@ -36,6 +58,7 @@ a {
   align-items: center;
   order: 2;
   box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 select.selectOption {
@@ -138,14 +161,14 @@ select.selectOption option {
 .result::-webkit-scrollbar {
   display: none;
 } 
-/* .result::-webkit-scrollbar-track { */
-  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);  */
-  /* background-color: rgba(0,0,0,0); */
-/* }  */
-/* .result::-webkit-scrollbar-thumb {
+.result::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+  background-color: rgba(0,0,0,0);
+} 
+.result::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
   border-radius: 15px;
-} */
+}
 
 .result {
   font-family: 'IBMPlexSansKR-Regular', sans-serif;
