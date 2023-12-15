@@ -63,7 +63,7 @@ a {
 
 select.selectOption {
   margin: 30px 0 50px;
-  padding: 0.6rem 1rem;
+  padding-left: 5px;
   width: 90px;
   height: 40px;
   border: 1px solid rgba(255,255,255,0.9);;
