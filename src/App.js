@@ -3,16 +3,18 @@ import axios from 'axios';
 import SelectOption from './components/SelectOption';
 import SearchBar from './components/SearchBar';
 import Result from './components/Result';
-import './App.css';
 import { isEqual } from 'lodash';
+import './App.css';
+
 
 function App() {
   const [movie, setMovie] = useState([]);
   const [item, setItem] = useState('');
   const [optVal, setOptVal] = useState('1');
   const [selectedMoviePoster, setSelectedMoviePoster] = useState(null);
-  const ServiceKey = process.env.REACT_APP_API_KEY;
-
+  const ServiceKey = process.env.REACT_APP_KMDb_API_KEY;
+  console.log(ServiceKey);
+  
   const openPopup = (posterUrl) => {
     setSelectedMoviePoster(posterUrl);
   };
@@ -50,8 +52,9 @@ function App() {
     }
 
     const query = encodeURIComponent(item);
-    let url;
     
+
+    let url;
     // 옵션에 따라 URL 선택
     if (optVal === '1') {
       url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&query=${query}&ServiceKey=${ServiceKey}&listCount=20`;
@@ -62,7 +65,8 @@ function App() {
     } else if (optVal === '4') {
       url = `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&actor=${query}&ServiceKey=${ServiceKey}&listCount=20&sort=prodYear,1`;
     }
-
+    
+    
     try {
       const response = await axios.get(url);
 
