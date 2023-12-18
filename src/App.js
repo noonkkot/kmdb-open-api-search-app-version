@@ -13,7 +13,6 @@ function App() {
   const [optVal, setOptVal] = useState('1');
   const [selectedMoviePoster, setSelectedMoviePoster] = useState(null);
   const ServiceKey = process.env.REACT_APP_API_KEY;
-  console.log(ServiceKey);
   
   const openPopup = (posterUrl) => {
     setSelectedMoviePoster(posterUrl);

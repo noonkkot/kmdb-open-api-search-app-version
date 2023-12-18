@@ -71,9 +71,6 @@ select.selectOption {
   position: relative;
 }
 
-select.selectOption option {
-}
-
 /* 검색 */
 .input-group {
   margin: 30px 0 50px;
